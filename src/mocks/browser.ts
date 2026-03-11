@@ -1,4 +1,4 @@
-import { setupWorker } from "msw/browser"
+import { setupWorker } from "msw"
 import { authHandlers } from "./handlers/authHandler"
 import { taskHandlers } from "./handlers/taskHandler"
 // import { authHandlers } from "./handlers/authHandlers"
