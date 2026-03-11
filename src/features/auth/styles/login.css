@@ -1,0 +1,313 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  .lp-root {
+    min-height: 100vh;
+    background: #0a0a0f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    font-family: 'Syne', sans-serif;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Ambient background glows */
+  .lp-root::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 55% 45% at 15% 15%, rgba(99,102,241,0.14) 0%, transparent 65%),
+      radial-gradient(ellipse 45% 50% at 85% 85%, rgba(56,189,248,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 30% 30% at 80% 15%, rgba(129,140,248,0.06) 0%, transparent 55%);
+    pointer-events: none;
+  }
+
+  /* Grid */
+  .lp-grid {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+  }
+
+  /* Corner decorations */
+  .lp-corner {
+    position: fixed;
+    width: 180px;
+    height: 180px;
+    pointer-events: none;
+    opacity: 0.35;
+  }
+  .lp-corner-tl {
+    top: 0; left: 0;
+    border-top: 1px solid rgba(99,102,241,0.5);
+    border-left: 1px solid rgba(99,102,241,0.5);
+    border-radius: 0 0 8px 0;
+  }
+  .lp-corner-br {
+    bottom: 0; right: 0;
+    border-bottom: 1px solid rgba(56,189,248,0.4);
+    border-right: 1px solid rgba(56,189,248,0.4);
+    border-radius: 8px 0 0 0;
+  }
+
+  /* Card */
+  .lp-card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04) inset;
+    animation: lp-in 0.5s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  @keyframes lp-in {
+    from { opacity: 0; transform: translateY(24px) scale(0.98); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Top accent line */
+  .lp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 40px; right: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(99,102,241,0.6), rgba(56,189,248,0.4), transparent);
+    border-radius: 0 0 4px 4px;
+  }
+
+  /* Brand */
+  .lp-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .lp-icon {
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, #6366f1, #38bdf8);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: white;
+    box-shadow: 0 0 32px rgba(99,102,241,0.45), 0 0 0 1px rgba(255,255,255,0.1) inset;
+    animation: lp-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes lp-pulse {
+    0%, 100% { box-shadow: 0 0 32px rgba(99,102,241,0.45), 0 0 0 1px rgba(255,255,255,0.1) inset; }
+    50%       { box-shadow: 0 0 48px rgba(99,102,241,0.7), 0 0 0 1px rgba(255,255,255,0.15) inset; }
+  }
+
+  .lp-title {
+    font-family: 'Syne', sans-serif !important;
+    font-size: 28px !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    margin: 0 !important;
+    letter-spacing: -0.5px;
+    line-height: 1 !important;
+    text-align: center;
+  }
+
+  .lp-subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  /* Divider */
+  .lp-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+    margin-bottom: 28px;
+  }
+
+  /* Alert */
+  .lp-alert.ant-alert {
+    background: rgba(239,68,68,0.08) !important;
+    border: 1px solid rgba(239,68,68,0.25) !important;
+    border-radius: 10px !important;
+    margin-bottom: 20px !important;
+  }
+  .lp-alert .ant-alert-message {
+    font-family: 'Syne', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #f87171 !important;
+  }
+  .lp-alert .ant-alert-description {
+    font-family: 'DM Mono', monospace !important;
+    font-size: 11px !important;
+    color: rgba(248,113,113,0.7) !important;
+  }
+  .lp-alert .ant-alert-icon {
+    color: #f87171 !important;
+  }
+
+  /* Form */
+  .lp-form .ant-form-item-label > label {
+    font-family: 'DM Mono', monospace !important;
+    font-size: 11px !important;
+    font-weight: 500 !important;
+    color: rgba(255,255,255,0.4) !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    height: auto !important;
+  }
+  .lp-form .ant-form-item-label > label::before {
+    display: none !important;
+  }
+  .lp-form .ant-form-item-required::after {
+    content: '*' !important;
+    color: #6366f1 !important;
+    font-family: 'DM Mono', monospace !important;
+    margin-left: 4px;
+    visibility: visible !important;
+  }
+  .lp-form .ant-form-item {
+    margin-bottom: 20px !important;
+  }
+  .lp-form .ant-form-item-explain-error {
+    font-family: 'DM Mono', monospace !important;
+    font-size: 11px !important;
+    color: #f87171 !important;
+    margin-top: 5px !important;
+  }
+
+  /* Inputs */
+  .lp-form .ant-input-affix-wrapper {
+    background: rgba(255,255,255,0.04) !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    border-radius: 10px !important;
+    padding: 0 14px !important;
+    height: 48px !important;
+    transition: all 0.2s ease !important;
+  }
+  .lp-form .ant-input-affix-wrapper:hover {
+    border-color: rgba(255,255,255,0.16) !important;
+  }
+  .lp-form .ant-input-affix-wrapper:focus,
+  .lp-form .ant-input-affix-wrapper-focused {
+    border-color: rgba(99,102,241,0.5) !important;
+    background: rgba(99,102,241,0.05) !important;
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.1) !important;
+  }
+  .lp-form .ant-input-affix-wrapper .ant-input-prefix {
+    color: rgba(255,255,255,0.22) !important;
+    margin-right: 10px !important;
+    font-size: 13px;
+  }
+  .lp-form .ant-input-affix-wrapper .ant-input {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #ffffff !important;
+    font-family: 'Syne', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    caret-color: #6366f1;
+    height: 46px !important;
+    padding: 0 !important;
+  }
+  .lp-form .ant-input-affix-wrapper input::placeholder {
+    color: rgba(255,255,255,0.18) !important;
+    font-family: 'DM Mono', monospace !important;
+    font-size: 12px !important;
+  }
+  /* Password eye icon */
+  .lp-form .ant-input-suffix .ant-input-password-icon {
+    color: rgba(255,255,255,0.25) !important;
+    transition: color 0.2s;
+  }
+  .lp-form .ant-input-suffix .ant-input-password-icon:hover {
+    color: rgba(255,255,255,0.6) !important;
+  }
+  .lp-form .ant-form-item-has-error .ant-input-affix-wrapper {
+    border-color: rgba(248,113,113,0.4) !important;
+  }
+
+  /* Submit button */
+  .lp-submit {
+    height: 52px !important;
+    border-radius: 12px !important;
+    border: none !important;
+    background: linear-gradient(135deg, #6366f1, #818cf8) !important;
+    font-family: 'Syne', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.3px !important;
+    box-shadow: 0 4px 24px rgba(99,102,241,0.35) !important;
+    transition: all 0.2s ease !important;
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin-top: 8px;
+  }
+  .lp-submit:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 32px rgba(99,102,241,0.55) !important;
+  }
+  .lp-submit:active {
+    transform: translateY(0) !important;
+  }
+
+  /* Demo credentials */
+  .lp-demo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .lp-demo-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .lp-demo-cred {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .lp-demo-chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(99,102,241,0.8);
+    background: rgba(99,102,241,0.1);
+    border: 1px solid rgba(99,102,241,0.2);
+    border-radius: 6px;
+    padding: 2px 8px;
+  }
+  .lp-demo-sep {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.12);
+  }

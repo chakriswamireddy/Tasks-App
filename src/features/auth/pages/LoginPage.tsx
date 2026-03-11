@@ -1,79 +1,108 @@
-import { Button, Card, Form, Input, Typography, Alert } from "antd"
+import { Button, Form, Input, Typography, Alert } from "antd"
+import {
+  ThunderboltOutlined,
+  UserOutlined,
+  LockOutlined,
+  ArrowRightOutlined,
+} from "@ant-design/icons"
 import { useAppDispatch, useAppSelector } from "../../../app/hooks"
 import { loginUser } from "../authSlice"
 import { useNavigate } from "react-router-dom"
 
+import '../styles/login.css'
+
 const { Title } = Typography
+
+
 
 export default function LoginPage() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-
   const { loading, error } = useAppSelector((state) => state.auth)
 
   const onFinish = async (values: { username: string; password: string }) => {
     const result = await dispatch(loginUser(values))
-
-    if (loginUser.fulfilled.match(result)) {
-      navigate("/dashboard")
-    }
+    if (loginUser.fulfilled.match(result)) navigate("/dashboard")
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      
-      <Card className="w-full max-w-md shadow-lg">
+    <>
+      <div className="lp-root">
+        <div className="lp-grid" />
+        <div className="lp-corner lp-corner-tl" />
+        <div className="lp-corner lp-corner-br" />
 
-        <div className="text-center mb-6">
-          <Title level={3}>Task Manager</Title>
-          <p className="text-gray-500">Login to continue</p>
-        </div>
+        <div className="lp-card">
+          <div className="lp-brand">
+            <div className="lp-icon">
+              <ThunderboltOutlined />
+            </div>
+            <div>
+              <Title className="lp-title">TaskFlow</Title>
+              <div className="lp-subtitle" style={{ marginTop: 6 }}>
+                Sign in to your workspace
+              </div>
+            </div>
+          </div>
 
-        {error && (
-          <Alert
-            type="error"
-            message="Login Failed"
-            description={error}
-            className="mb-4"
-          />
-        )}
+          <div className="lp-divider" />
 
-        <Form layout="vertical" onFinish={onFinish}>
+          {error && (
+            <Alert
+              type="error"
+              showIcon
+              message="Authentication Failed"
+              description={error}
+              className="lp-alert"
+            />
+          )}
 
-          <Form.Item
-            label="Username"
-            name="username"
-            rules={[{ required: true, message: "Please enter username" }]}
-          >
-            <Input placeholder="test" />
-          </Form.Item>
-
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[{ required: true, message: "Please enter password" }]}
-          >
-            <Input.Password placeholder="test123" />
-          </Form.Item>
-
-          <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              block
-              loading={loading}
+          <Form layout="vertical" onFinish={onFinish} className="lp-form">
+            <Form.Item
+              label="Username"
+              name="username"
+              rules={[{ required: true, message: "Username is required" }]}
             >
-              Login
-            </Button>
-          </Form.Item>
+              <Input
+                prefix={<UserOutlined />}
+                placeholder="Enter username"
+              />
+            </Form.Item>
 
-        </Form>
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[{ required: true, message: "Password is required" }]}
+            >
+              <Input.Password
+                prefix={<LockOutlined />}
+                placeholder="Enter password"
+              />
+            </Form.Item>
 
-        <div className="text-center text-gray-500 text-sm">
-          Demo credentials: test / test123
+            <Form.Item style={{ marginBottom: 0 }}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={loading}
+                className="lp-submit"
+                icon={!loading && <ArrowRightOutlined />}
+              >
+                Sign In
+              </Button>
+            </Form.Item>
+          </Form>
+
+          <div className="lp-demo">
+            <span className="lp-demo-label">Demo</span>
+            <div className="lp-demo-cred">
+              <span className="lp-demo-chip">test</span>
+              <span className="lp-demo-sep">/</span>
+              <span className="lp-demo-chip">test123</span>
+            </div>
+          </div>
         </div>
-
-      </Card>
-    </div>
+      </div>
+    </>
   )
 }
