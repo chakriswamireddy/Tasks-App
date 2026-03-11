@@ -4,11 +4,11 @@ import authReducer, {
     restoreSession
   } from "./authSlice"
   
-  import { loginRequest } from "./AuthAPI"
+  // import { loginRequest } from "./AuthAPI"
   
   jest.mock("./AuthAPI")
   
-  const mockedLoginRequest = loginRequest as jest.Mock
+  // const mockedLoginRequest = loginRequest as jest.Mock
   
   describe("authSlice", () => {
   
