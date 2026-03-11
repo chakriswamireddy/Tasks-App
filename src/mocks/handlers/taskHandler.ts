@@ -7,7 +7,7 @@ let tasks: Task[] = [
 
 export const taskHandlers = [
 
-  rest.get("/tasks", (req, res, ctx) => {
+  rest.get("/tasks", (_ , res, ctx) => {
     return res(ctx.status(200), ctx.json(tasks))
   }),
 

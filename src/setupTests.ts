@@ -8,13 +8,16 @@ class TextEncoderMock {
   }
   
   class TextDecoderMock {
-    decode(arr: Uint8Array) {
+    decode(input: ArrayBuffer | Uint8Array) {
+      const arr = input instanceof Uint8Array ? input : new Uint8Array(input)
       return String.fromCharCode(...arr)
     }
   }
+  
+  globalThis.TextDecoder = TextDecoderMock as any
 
   ;(globalThis as any).TextEncoder = TextEncoderMock
-  ;(globalThis as any).TextDecoder = TextDecoderMock
+  // ;(globalThis as any).TextDecoder = TextDecoderMock
 
 class ResizeObserver {
   observe() {}
