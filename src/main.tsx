@@ -6,12 +6,12 @@ import { Provider } from "react-redux";
 import { store } from "./app/store.ts";
 
 async function enableMocking() {
-  if (import.meta.env.DEV) {
+  // if (import.meta.env.DEV) {
     const { worker } = await import("./mocks/browser");
     await worker.start({
       onUnhandledRequest: "warn",
     });
-  }
+  // }
 }
 
 enableMocking().then(() => {
