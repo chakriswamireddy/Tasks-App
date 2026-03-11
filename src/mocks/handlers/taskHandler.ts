@@ -12,13 +12,14 @@ export const taskHandlers = [
   }),
 
   rest.post("/tasks", async (req, res, ctx) => {
-    const body = await req.json() as Omit<Task, "id">
+    const text = await req.text()
+    const body = JSON.parse(text)
 
     const newTask: Task = {
       id: String(tasks.length + 1),
       ...body
     }
-
+    
     tasks.push(newTask)
 
     return res(ctx.status(201), ctx.json(newTask))

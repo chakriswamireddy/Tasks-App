@@ -8,7 +8,14 @@ const STATIC_USER = {
 export const authHandlers = [
   rest.post("/login", async (req, res, ctx) => {
 
-    const { username, password } = await req.json()
+    const text = await req.text()
+    // console.log("text",text)
+    const body = JSON.parse(text)
+
+    // console.log("bod", body)
+
+    const { username, password } =  body
+    
 
     if (
       username === STATIC_USER.username &&
