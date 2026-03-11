@@ -1,6 +1,14 @@
-import { api } from "../../services/axiosClient"
 
-export const loginRequest = async (username: string, password: string) => {
-  const response = await api.post("/login", { username, password })
-  return response.data
+
+
+export const loginRequest = async (data: { username:  string, password:  string }) => {
+  const response = await fetch("/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+
+  return response.json()
 }

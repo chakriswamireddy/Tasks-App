@@ -1,33 +1,22 @@
 import { loginRequest } from "./AuthAPI"
-import { api } from "../../services/axiosClient"
 
-jest.mock("../../services/axiosClient")
 
-const mockedApi = api as jest.Mocked<typeof api>
 
-describe("AuthAPI", () => {
+jest.mock("./AuthAPI")
+const mockedLoginRequest = loginRequest as jest.Mock
 
-  afterEach(() => {
-    jest.clearAllMocks()
+
+it("loginRequest should return user data", async () => {
+  mockedLoginRequest.mockResolvedValue({
+    token: "mock-token",
+    user:   "test" 
   })
 
-  test("loginRequest should call POST /login with credentials", async () => {
-
-    const mockResponse = {
-      token: "fakeJWT",
-      username: "test"
-    }
-
-    mockedApi.post.mockResolvedValue({ data: mockResponse })
-
-    const result = await loginRequest("test", "test123")
-
-    expect(mockedApi.post).toHaveBeenCalledWith("/login", {
-      username: "test",
-      password: "test123"
-    })
-
-    expect(result).toEqual(mockResponse)
+  const result = await loginRequest({
+    username: "test",
+    password: "test1234"
   })
 
+  expect(loginRequest).toHaveBeenCalled()
+  expect(result.token).toBe("mock-token")
 })

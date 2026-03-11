@@ -13,7 +13,7 @@ const initialState: AuthState = {
 export const loginUser = createAsyncThunk(
   "auth/login",
   async ({ username, password }: { username: string; password: string }) => {
-    return await loginRequest(username, password)
+    return await loginRequest({username, password})
   }
 )
 
